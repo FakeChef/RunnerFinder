@@ -1,0 +1,18 @@
+# Engine: scan, index, detection (Ultralytics YOLO + PyTorch) and OCR (PaddleOCR).
+# This is the worker Python started by the desktop GUI and the Python of index_cli.py.
+# PyPI's Windows torch wheels are CPU-only. For an NVIDIA GPU see README.
+pillow==12.3.0
+numpy==2.3.5                 # imported directly (also required by the AI stack)
+pyyaml==6.0.2                # imported directly (config/bib_rules.yaml)
+ultralytics==8.4.165
+torch==2.14.0
+torchvision==0.29.0
+paddlepaddle==3.3.1
+paddleocr==3.7.0
+
+# OpenCV: two distributions are unavoidable (see README, "OpenCV").
+# Ultralytics declares opencv-python; PaddleOCR's runtime dependency check
+# requires opencv-contrib-python by name. Both are pinned to the SAME
+# version so whichever binary Python loads is the same OpenCV release.
+opencv-python==4.10.0.84
+opencv-contrib-python==4.10.0.84

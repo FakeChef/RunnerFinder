@@ -1,0 +1,2 @@
+# User interface
+streamlit==1.64.0

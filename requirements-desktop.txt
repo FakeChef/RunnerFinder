@@ -1,0 +1,14 @@
+# Desktop GUI (PySide6). This is the process started by desktop\RunnerFinder.pyw.
+# Analysis runs in a separate worker Python with the AI stack
+# (RUNNERFINDER_WORKER_PYTHON, see desktop/services/analysis_job.py),
+# so the GUI environment needs no PyTorch, PaddleOCR or OpenCV.
+#
+# Hash-locked install file, generated from this file with:
+#   uv pip compile requirements-desktop.txt --python-platform x86_64-pc-windows-msvc --python-version 3.11 --generate-hashes --exclude-newer 2026-09-29T00:00:00Z --no-header -o requirements-desktop-lock-win-py311.txt
+
+# Qt for Python: QtCore, QtGui, QtWidgets (GUI) and QtTest (desktop/tests) are all in Essentials.
+# Pulls in shiboken6==6.8.1.
+PySide6-Essentials==6.8.1
+
+# Imported by the GUI process through config.py -> utils/pil_compat.py.
+pillow==12.3.0

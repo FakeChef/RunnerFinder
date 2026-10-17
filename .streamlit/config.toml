@@ -1,0 +1,8 @@
+# Local-only: the app is reachable from this PC only, and Streamlit's
+# anonymous usage statistics are switched off.
+[server]
+address = "localhost"
+headless = false
+
+[browser]
+gatherUsageStats = false

@@ -1,0 +1,69 @@
+# Runner Photo Finder - bib candidate filter, rule set 2 (V1.3.1, ocr/bib_filter.py)
+#
+# Universal rules for marathons, trail races, triathlons and other events: no race-specific length,
+# prefix, range, wave or distance is assumed. The filter runs AFTER OCR and never deletes anything:
+# every candidate stays stored, with its score, status and reasons in evidence_json["filter"].
+#
+# Status:
+#   accepted    score >= accept_threshold                       normal search result
+#   uncertain   below the threshold, no evidence of noise       searchable, labelled "Low confidence"
+#   noise       below the threshold with a noise reason         hidden unless "Show filtered candidates"
+#
+# "Core" = the digit run of the bib, leading zeros kept ("A0175" -> "0175").
+#
+# To change the rules for one event, copy this file, adjust it and re-score that event:
+#   index_cli.py filter-bibs --event "..." --rules my_rules.yaml            (dry run)
+#   index_cli.py filter-bibs --event "..." --rules my_rules.yaml --apply    (backup first)
+# Use bib_patterns only with authoritative race data (e.g. the organiser's bib list format).
+
+rules_version: 2
+event_type: any
+
+# --- format eligibility
+common_lengths: [4, 5, 6]        # core length of ordinary bibs (4 digits are NOT rejected)
+common_length_score: 5
+short_lengths: [3]               # possible small-race bibs: searchable, never confirmed by length alone
+short_length_score: 1            # reason short_number (uncertain)
+long_length_score: 1             # 7+ digits: reason long_number (uncertain)
+min_digits: 3                    # 1-2 digit cores (10KM, wave 3, pacer 09): reason too_few_digits (noise)
+short_score: -4
+max_prefix_letters: 3            # A1076, B60914, UT1234
+clean_form_score: 1              # prefix letters + digits only
+high_confidence: 0.90
+high_confidence_score: 2
+
+# --- race data (empty: universal rules)
+bib_patterns: []
+pattern_score: 3
+
+# --- evidence-based noise
+exclude_patterns: [KM, km, 号, 存包, WAVE, 组]   # reason excluded_text (noise)
+exclude_score: -5
+distance_pattern: '\d+(?:[.,]\d+)?\s*K\b'      # 10K, 21.1K: reason distance (noise)
+distance_score: -5
+years: ['2024', '2025', '2026']
+# a core EQUAL to a year: inside other text ("2026 PARENT-CHILD") -> reason year (noise);
+# standalone ("2026") -> reason possible_year (uncertain: it may be a real bib); with a letter
+# prefix ("A2026") -> no penalty. A longer bib that contains a year ("12026") is not penalised.
+# A year read upside down (180 degrees: "2026" -> "9202", wristbands) is treated like the year.
+year_in_text_score: -8
+possible_year_score: -4
+# every raw reading has another word of >= 4 letters ("quohua 7912"): reason text_context (uncertain)
+text_context_min_letters: 4
+text_context_score: -4
+penalty_patterns:
+  # Bag-check line printed on many bibs ("13-65号存包"). The English OCR reads
+  # it as "13-655", "7-1185178", "2-1999": 1-2 digits, a hyphen, more digits.
+  - pattern: '^\s*\d{1,2}\s*-\s*\d'
+    score: -8
+    reason: likely_storage_number
+# same number read outside a person crop in at least this many photos (applied by filter-bibs)
+non_person_repeat_min_photos: 3
+non_person_repeat_score: -3
+# the bib number is the largest text on a bib: a candidate whose text height is at most small_text_ratio
+# of another (non-noise) candidate read in the same person crop is secondary print (bag-deposit zone,
+# sponsor line, race title): reason small_text (uncertain, still searchable)
+small_text_ratio: 0.5
+small_text_score: -4
+
+accept_threshold: 5

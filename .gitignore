@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/
+/Exports/
+models/*.pt
+evaluation/ground_truth.csv
+evaluation/report_*
+models/paddlex/
+.venv-*/
+*.db
+*.db-shm
+*.db-wal
+*.log

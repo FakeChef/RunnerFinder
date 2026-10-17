@@ -1,0 +1,7 @@
+# Development and tests: enough to run all unit and integration tests (no AI).
+# Hash-locked install file (setup_windows.bat core): requirements-core-lock-win-py311.txt, generated with:
+#   uv pip compile requirements-dev.txt --python-platform x86_64-pc-windows-msvc --python-version 3.11 --generate-hashes --exclude-newer 2026-09-29T00:00:00Z --no-header -o requirements-core-lock-win-py311.txt
+# e2e tests additionally need the engine (requirements-engine.txt) and the models.
+pillow==12.3.0
+pytest==9.1.1
+pyyaml==6.0.2                # config/bib_rules.yaml is loaded by ocr/bib_filter.py (unit and integration tests)

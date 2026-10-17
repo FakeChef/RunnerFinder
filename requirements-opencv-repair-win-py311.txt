@@ -1,0 +1,18 @@
+# Repairs the shared cv2 module if one OpenCV package was removed or replaced.
+# Used by:  .\.venv\Scripts\python.exe -m pip install --force-reinstall --no-deps --require-hashes -r requirements-opencv-repair-win-py311.txt
+opencv-contrib-python==4.10.0.84 \
+    --hash=sha256:040575b69e4f3aa761676bace4e3d1b8485fbfaf77ef77b266ab6bda5a3b5e9b \
+    --hash=sha256:2a36257ec1375d1bec2a62177ea39828ff9804de6831ee39646bdc875c343cec \
+    --hash=sha256:47ec3160dae75f70e099b286d1a2e086d20dac8b06e759f60eaf867e6bdecba7 \
+    --hash=sha256:4a3eae0ed9cadf1abe9293a6938a25a540e2fd6d7fc308595caa5896c8b36a0c \
+    --hash=sha256:a261223db41f6e512d76deaf21c8fcfb4fbbcbc2de62ca7f74a05f2c9ee489ef \
+    --hash=sha256:dea80d4db73b8acccf9e16b5744bf3654f47b22745074263f0a6c10de26c5ef5 \
+    --hash=sha256:ee4b0919026d8c533aeb69b16c6ec4a891a2f6844efaa14121bf68838753209c
+opencv-python==4.10.0.84 \
+    --hash=sha256:09a332b50488e2dda866a6c5573ee192fe3583239fb26ff2f7f9ceb0bc119ea6 \
+    --hash=sha256:2db02bb7e50b703f0a2d50c50ced72e95c574e1e5a0bb35a8a86d0b35c98c236 \
+    --hash=sha256:32dbbd94c26f611dc5cc6979e6b7aa1f55a64d6b463cc1dcd3c95505a63e48fe \
+    --hash=sha256:71e575744f1d23f79741450254660442785f45a0797212852ee5199ef12eed98 \
+    --hash=sha256:72d234e4582e9658ffea8e9cae5b63d488ad06994ef12d81dc303b17472f3526 \
+    --hash=sha256:9ace140fc6d647fbe1c692bcb2abce768973491222c067c131d80957c595b71f \
+    --hash=sha256:fc182f8f4cda51b45f01c64e4cbedfc2f00aff799debebc305d8d0210c43f251

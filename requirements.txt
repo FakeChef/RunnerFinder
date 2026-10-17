@@ -1,0 +1,7 @@
+# Full CPU install (engine + legacy Streamlit UI + tests), human-edited.
+# Installs use the hash-pinned lock file requirements-lock-win-py311.txt, generated from this file with:
+#   uv pip compile requirements.txt --python-platform x86_64-pc-windows-msvc --python-version 3.11 --generate-hashes --exclude-newer 2026-09-29T00:00:00Z --no-header -o requirements-lock-win-py311.txt
+# The desktop GUI has its own file: requirements-desktop.txt.
+-r requirements-engine.txt
+-r requirements-ui.txt
+-r requirements-dev.txt
