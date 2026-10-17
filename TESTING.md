@@ -23,6 +23,30 @@ run_tests.bat -m integration
 
 `run_tests.bat` runs `.venv\Scripts\python.exe -m pytest` with your arguments.
 
+**Without the Windows scripts** (for example on Linux or macOS, which are not tested), a minimal setup for the unit and integration tests is:
+
+```
+python3.11 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pytest tests/unit tests/integration
+```
+
+This installs the pinned versions without the Windows hash lock. At least one test (hidden-file handling in `test_scanner_files.py`) is Windows-specific and skips itself elsewhere.
+
+## Verified status
+
+Last verified on 2026-10-17 at commit `9cc298d`, on Windows 10 with Python 3.11.9, in fresh environments installed from the lock files:
+
+| Suite | Result |
+|---|---|
+| `tests/unit` + `tests/integration` (core lock) | 369 passed, 1 skipped (symbolic links need Windows Developer Mode) |
+| Desktop self-contained (`test_skeleton`, `test_v12_search`, `test_v13_gui`; desktop lock) | 23 passed |
+| `desktop.tests.test_v13_video` | 24 passed, 2 skipped (private data) |
+| Other desktop modules without private data or a GPU environment | 27 passed, 43 skipped |
+| `tests/e2e` | **not run**: no AI stack or models in that environment (4 skipped) |
+| GPU, private-data and real-photo tests | **not run** |
+| Linux / macOS | **not tested** |
+
 ## Desktop tests (unittest)
 
 Run them with the desktop environment, from the repository folder, without a display:

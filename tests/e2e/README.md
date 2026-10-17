@@ -1,9 +1,12 @@
-# End-to-end tests (planned, Phases 4-8)
+# End-to-end tests
 
-These will run the complete pipeline (scan -> YOLO -> PaddleOCR -> SQLite
--> search -> export) on a few test images. They need the AI stack and the
-downloaded models, and are skipped automatically when those are missing.
+These tests use the real AI packages instead of stand-ins. They are skipped automatically when the packages or models are missing.
 
-They check that the pipeline WORKS end to end. They do not measure
-accuracy on real race photos; that is done by `evaluation/evaluate.py`
-with your labelled photos.
+| Test file | Checks | Needs |
+|---|---|---|
+| `test_ultralytics_pillow_patch.py` | the Ultralytics behaviour that `utils/pil_compat.py` works around still exists in the pinned version, and the scanner is unaffected | Ultralytics (no model) |
+| `test_ultralytics_offline.py` | detection makes no network connections once the model is on disk | Ultralytics + `models/yolo26n.pt` |
+| `test_yolo_detection.py` | real YOLO26n person detection on the sample photo shipped with Ultralytics | Ultralytics + `models/yolo26n.pt` |
+| `test_paddleocr_reader.py` | PaddleOCR settings are accepted; real reading of synthetic bibs when the models are present | PaddleOCR (+ models in `models/paddlex`) |
+
+Install the full engine environment and download the models first (see `MODEL_SETUP.md`). These tests check that the components work; they do not measure accuracy on real race photos.

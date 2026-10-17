@@ -26,7 +26,7 @@ Supported files: photos `.jpg`, `.jpeg`, `.png`; videos `.mp4`, `.mov`, `.m4v` (
 
 ## Requirements
 
-- Windows, 64-bit, and **Python 3.11** (64-bit). The hash-locked dependency files are built for exactly this platform.
+- Windows, 64-bit, and **Python 3.11** (64-bit). The hash-locked dependency files and the `.bat` scripts are built for exactly this platform. Linux and macOS are **not tested**; see [TESTING.md](TESTING.md) for a minimal cross-platform test setup.
 - Analysis from the **desktop app** runs OCR on an **NVIDIA GPU** and is disabled when no GPU environment is found. Searching works without a GPU. The command line can also run OCR on the CPU (`--ocr-device cpu`, the default).
 - About 1-2 GB of downloads for the AI packages, plus the model files (see [MODEL_SETUP.md](MODEL_SETUP.md)).
 
@@ -41,6 +41,12 @@ setup_windows.bat
 ```
 
 For the desktop app and the GPU environment, see [INSTALLATION.md](INSTALLATION.md).
+
+## Known limitations
+
+- **GPU setup is not reproducible from this repository yet.** The desktop app's analysis needs an NVIDIA GPU environment (`paddlepaddle-gpu` plus the CUDA/cuDNN wheels). There is no lock file for it, only a version record (`requirements-gpu-win-py311.txt`). Without it, use the command line on the CPU; searching in the desktop app works without a GPU.
+- **Export is not implemented.** `export/exporter.py` builds the folder layout but `export_photos()` raises `NotImplementedError`.
+- **Some tests need extra setup.** The e2e tests need the AI stack and the models, and several desktop tests need private data or a GPU environment. They are skipped when these are missing (see [TESTING.md](TESTING.md)).
 
 ## Documentation
 
