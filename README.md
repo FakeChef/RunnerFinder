@@ -1,5 +1,7 @@
 # RunnerFinder
 
+**English** | [简体中文](README.zh-CN.md)
+
 Find race photos and video clips by bib number (`10258`, `T1234`, `UT001`) on your own Windows PC.
 
 RunnerFinder scans a folder of event photos and videos, finds the runners with a person
