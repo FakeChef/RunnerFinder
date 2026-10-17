@@ -64,4 +64,8 @@ Bibs are always handled as **text**, so leading zeros are kept (`UT001`, `00123`
 
 ## License
 
-The license has not been decided yet. This repository uses third-party components under their own licenses, including Ultralytics (AGPL-3.0), PaddleOCR (Apache-2.0) and PySide6 (LGPL, or a commercial Qt license). A full notice file will be added with the license decision.
+Copyright (C) 2026 the RunnerFinder authors.
+
+RunnerFinder is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. It is distributed WITHOUT ANY WARRANTY; see [LICENSE](LICENSE) for details.
+
+Third-party packages and models are not included in this repository and keep their own licenses: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
